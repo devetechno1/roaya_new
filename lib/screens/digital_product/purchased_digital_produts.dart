@@ -136,7 +136,6 @@ class _PurchasedDigitalProductsState extends State<PurchasedDigitalProducts> {
               const EdgeInsets.only(top: 0.0, bottom: 10, left: 20, right: 20),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            // 3
             return PurchasedDigitalProductCard(
               id: _digitalProducts[index].id,
               image: _digitalProducts[index].thumbnailImage,

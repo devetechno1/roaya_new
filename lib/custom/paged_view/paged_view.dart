@@ -215,8 +215,8 @@ class _PagedViewState<T> extends State<PagedView<T>> {
         _isLoading = false;
       });
       _maybePrefetchToFillViewport();
-    } catch (_) {
-      recordError(_, StackTrace.current);
+    } catch (_, st) {
+      recordError(_, st);
 
       if (!mounted) return;
       setState(() {
@@ -238,8 +238,8 @@ class _PagedViewState<T> extends State<PagedView<T>> {
         _hasMore = res.hasMore;
         _isLoadingMore = false;
       });
-    } catch (_) {
-      recordError(_, StackTrace.current);
+    } catch (_, st) {
+      recordError(_, st);
       if (!mounted) return;
       setState(() => _isLoadingMore = false);
     }

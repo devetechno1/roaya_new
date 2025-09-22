@@ -42,12 +42,12 @@ class NavigationService {
       } else {
         throw 'invalidURL'.tr(context: context);
       }
-    } catch (e) {
+    } catch (e, st) {
       await callBackError?.call();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
-      recordError(e, StackTrace.current);
+      recordError(e, st);
 
       return false;
     }

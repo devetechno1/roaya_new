@@ -10,9 +10,9 @@ Future<Status<T>> executeAndHandleErrors<T>(
 ]) async {
   try {
     return Success<T>(await function());
-  } catch (e) {
+  } catch (e, st) {
     log("error: $e");
-    recordError(e, StackTrace.current);
+    recordError(e, st);
 
     T? data;
     if (functionWhenError != null) data = await functionWhenError();

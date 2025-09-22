@@ -889,5 +889,13 @@ const Map<String, String> enLangs = {
   "pleaseEnsureUs": "Please ensure us",
   "no_best_selling_products_available": "No best-selling products available.",
   "no_auction_products": "No Auction Products",
-  "error_fetching_todays_deal_products": "Error fetching today's deal products"
+  "error_fetching_todays_deal_products": "Error fetching today's deal products",
+  "pause": "Pause",
+  "resume": "Resume",
+  "cancel": "Cancel",
+  "downloaded": "Downloaded",
+  "download_canceled": "Download canceled by user",
+  "saved_to": "Saved to",
+  "invoice_downloaded": "Invoice downloaded",
+
 };

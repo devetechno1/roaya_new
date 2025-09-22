@@ -65,8 +65,8 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
       if (request.method == 'GET' &&
           request.uri.queryParameters['query'] == 'getRawTeXHTML') {
       } else {}
-    } catch (e) {
-      recordError(e, StackTrace.current);
+    } catch (e, st) {
+      recordError(e, st);
 
       debugPrint('Exception in handleRequest: $e');
     }

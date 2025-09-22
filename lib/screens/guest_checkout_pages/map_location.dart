@@ -526,8 +526,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
       final http.Response response = await http.get(Uri.parse(url));
       final PlaceRes placeRes = PlaceRes.fromJson(jsonDecode(response.body));
       return placeRes.results ?? [];
-    } catch (e) {
-      recordError(e, StackTrace.current);
+    } catch (e, st) {
+      recordError(e, st);
       print("Error e = $e");
       return [];
     }

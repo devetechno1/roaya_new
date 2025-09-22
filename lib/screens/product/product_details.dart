@@ -2700,8 +2700,8 @@ class _ProductDetailsState extends State<ProductDetails>
       errorsTimes = 0;
 
       setState(() {});
-    } catch (e) {
-      recordError(e, StackTrace.current);
+    } catch (e, st) {
+      recordError(e, st);
       print("Error in runJavaScriptReturningResult : $e - times $errorsTimes");
       return await getDescriptionHeight();
     }

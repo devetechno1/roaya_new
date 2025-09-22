@@ -9,10 +9,8 @@ import 'package:app_links/app_links.dart';
 import 'package:clarity_flutter/clarity_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -41,7 +39,6 @@ import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
-import 'repositories/api-request.dart';
 import 'screens/address.dart';
 import 'screens/auction/auction_bidded_products.dart';
 import 'screens/auction/auction_products.dart';
@@ -115,10 +112,8 @@ Future<void> appRunner() async {
     BusinessSettingHelper().setBusinessSettingData(),
     BusinessSettingHelper.setInitLang(),
     Firebase.initializeApp(),
-    FlutterDownloader.initialize(debug: AppConfig.isDebugMode, ignoreSsl: true),
     Hive.initFlutter(),
   ]);
-  FlutterDownloader.registerCallback(downloadCallback);
 
   localeTranslation = await Hive.openBox<Map>('langs');
 

@@ -979,130 +979,136 @@ class _ProfileState extends State<Profile> {
         cacheExtent: 5.0,
         children: [
           if (AppConfig.businessSettingsData.walletSystem)
-            Container(
-              child: buildSettingAndAddonsHorizontalMenuItem(
-                  AppImages.wallet, 'my_wallet_ucf'.tr(context: context), () {
+            buildSettingAndAddonsHorizontalMenuItem(
+              AppImages.wallet,
+              'my_wallet_ucf'.tr(context: context),
+              () {
                 Navigator.push(
                     context, PageAnimation.fadeRoute(const Wallet()));
-              }),
+              },
             ),
           buildSettingAndAddonsHorizontalMenuItem(
-              AppImages.orders,
-              'orders_ucf'.tr(context: context),
-              is_logged_in.$
-                  ? () {
-                      Navigator.push(
-                          context, PageAnimation.fadeRoute(const OrderList()));
-                    }
-                  : () => null),
+            AppImages.orders,
+            'orders_ucf'.tr(context: context),
+            is_logged_in.$
+                ? () {
+                    Navigator.push(
+                        context, PageAnimation.fadeRoute(const OrderList()));
+                  }
+                : () => null,
+          ),
           buildSettingAndAddonsHorizontalMenuItem(
-              AppImages.heart,
-              'my_wishlist_ucf'.tr(context: context),
-              is_logged_in.$
-                  ? () {
-                      Navigator.push(
-                          context, PageAnimation.fadeRoute(Wishlist()));
-                    }
-                  : () => null),
+            AppImages.heart,
+            'my_wishlist_ucf'.tr(context: context),
+            is_logged_in.$
+                ? () {
+                    Navigator.push(
+                        context, PageAnimation.fadeRoute(Wishlist()));
+                  }
+                : () => null,
+          ),
           if (club_point_addon_installed.$)
             buildSettingAndAddonsHorizontalMenuItem(
-                AppImages.points,
-                'club_point_ucf'.tr(context: context),
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(
-                            context, PageAnimation.fadeRoute(Clubpoint()));
-                      }
-                    : () => null),
-          Container(
-            child: badges.Badge(
-              showBadge: is_logged_in.$,
-              position: badges.BadgePosition.topEnd(
-                  top: 2, end: AppDimensions.paddingLarge),
-              badgeStyle: badges.BadgeStyle(
-                shape: badges.BadgeShape.circle,
-                badgeColor: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
-                padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-              ),
-              ignorePointer: true,
-              badgeContent: Consumer<UnReadNotificationCounter>(
-                builder: (context, notification, child) {
-                  return Text(
-                    "${notification.unReadNotificationCounter}",
-                    style: const TextStyle(fontSize: 10, color: Colors.white),
-                  );
-                },
-              ),
-              child: buildSettingAndAddonsHorizontalMenuItem(
-                  AppImages.notification,
-                  'notification_ucf'.tr(context: context),
-                  is_logged_in.$
-                      ? () {
-                          Navigator.push(
-                                  context,
-                                  PageAnimation.fadeRoute(
-                                      const NotificationList()))
-                              .then((value) {
-                            onPopped(value);
-                          });
-                        }
-                      : () => null),
+              AppImages.points,
+              'club_point_ucf'.tr(context: context),
+              is_logged_in.$
+                  ? () {
+                      Navigator.push(
+                          context, PageAnimation.fadeRoute(Clubpoint()));
+                    }
+                  : () => null,
+            ),
+          badges.Badge(
+            showBadge: is_logged_in.$,
+            position: badges.BadgePosition.topEnd(
+                top: 2, end: AppDimensions.paddingLarge),
+            badgeStyle: badges.BadgeStyle(
+              shape: badges.BadgeShape.circle,
+              badgeColor: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+              padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+            ),
+            ignorePointer: true,
+            badgeContent: Consumer<UnReadNotificationCounter>(
+              builder: (context, notification, child) {
+                return Text(
+                  "${notification.unReadNotificationCounter}",
+                  style: const TextStyle(fontSize: 10, color: Colors.white),
+                );
+              },
+            ),
+            child: buildSettingAndAddonsHorizontalMenuItem(
+              AppImages.notification,
+              'notification_ucf'.tr(context: context),
+              is_logged_in.$
+                  ? () {
+                      Navigator.push(context,
+                              PageAnimation.fadeRoute(const NotificationList()))
+                          .then((value) {
+                        onPopped(value);
+                      });
+                    }
+                  : () => null,
             ),
           ),
           if (refund_addon_installed.$)
             buildSettingAndAddonsHorizontalMenuItem(
-                AppImages.refund,
-                'refund_requests_ucf'.tr(context: context),
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(
-                            context, PageAnimation.fadeRoute(RefundRequest()));
-                      }
-                    : () => null),
+              AppImages.refund,
+              'refund_requests_ucf'.tr(context: context),
+              is_logged_in.$
+                  ? () {
+                      Navigator.push(
+                          context, PageAnimation.fadeRoute(RefundRequest()));
+                    }
+                  : () => null,
+            ),
           if (AppConfig.businessSettingsData.conversationSystem)
             buildSettingAndAddonsHorizontalMenuItem(
-                AppImages.messages,
-                'messages_ucf'.tr(context: context),
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(
-                            context, PageAnimation.fadeRoute(MessengerList()));
-                      }
-                    : () => null),
+              AppImages.messages,
+              'messages_ucf'.tr(context: context),
+              is_logged_in.$
+                  ? () {
+                      Navigator.push(
+                          context, PageAnimation.fadeRoute(MessengerList()));
+                    }
+                  : () => null,
+            ),
           // if (auction_addon_installed.$)
-          if (false)
-            if (AppConfig.businessSettingsData.classifiedProduct)
-              buildSettingAndAddonsHorizontalMenuItem(
-                  AppImages.classifiedProduct,
-                  'classified_products'.tr(context: context),
-                  is_logged_in.$
-                      ? () {
-                          Navigator.push(context,
-                              PageAnimation.fadeRoute(const MyClassifiedAds()));
-                        }
-                      : () => null),
+          // if (false)
+          if (AppConfig.businessSettingsData.classifiedProduct)
+            buildSettingAndAddonsHorizontalMenuItem(
+              AppImages.classifiedProduct,
+              'classified_products'.tr(context: context),
+              is_logged_in.$
+                  ? () {
+                      Navigator.push(context,
+                          PageAnimation.fadeRoute(const MyClassifiedAds()));
+                    }
+                  : () => null,
+            ),
 
           buildSettingAndAddonsHorizontalMenuItem(
-              AppImages.download,
-              'downloads_ucf'.tr(context: context),
-              is_logged_in.$
-                  ? () {
-                      Navigator.push(
-                          context,
-                          PageAnimation.fadeRoute(
-                              const PurchasedDigitalProducts()));
-                    }
-                  : () => null),
+            AppImages.download,
+            'downloads_ucf'.tr(context: context),
+            is_logged_in.$
+                ? () {
+                    Navigator.push(
+                        context,
+                        PageAnimation.fadeRoute(
+                            const PurchasedDigitalProducts()));
+                  }
+                : () => null,
+          ),
           buildSettingAndAddonsHorizontalMenuItem(
-              AppImages.upload,
-              'upload_file_ucf'.tr(context: context),
-              is_logged_in.$
-                  ? () {
-                      Navigator.push(
-                          context, PageAnimation.fadeRoute(const UploadFile()));
-                    }
-                  : () => null),
+            AppImages.upload,
+            'upload_file_ucf'.tr(context: context),
+            is_logged_in.$
+                ? () {
+                    Navigator.push(
+                        context, PageAnimation.fadeRoute(const UploadFile()));
+                  }
+                : () => null,
+          ),
           // notification and badge contents
         ],
       ),
@@ -1110,7 +1116,10 @@ class _ProfileState extends State<Profile> {
   }
 
   Container buildSettingAndAddonsHorizontalMenuItem(
-      String img, String text, Function() onTap) {
+    String img,
+    String text,
+    Function() onTap,
+  ) {
     return Container(
       alignment: Alignment.center,
       //color: Colors.red,

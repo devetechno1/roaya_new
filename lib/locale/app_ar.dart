@@ -884,5 +884,12 @@ const Map<String, String> arLangs = {
   "pleaseEnsureUs": "يرجى التأكيد لنا",
   "no_best_selling_products_available": "لايوجد افضل مبيعات متاحه",
   "no_auction_products": "لاتوجد منتجات مزاد حاليا",
-  "error_fetching_todays_deal_products": "خطأ في تحميل منتجات العروض اليومية:"
+  "error_fetching_todays_deal_products": "خطأ في تحميل منتجات العروض اليومية:",
+  "pause": "إيقاف مؤقت",
+  "resume": "استئناف",
+  "cancel": "إلغاء",
+  "downloaded": "تم التحميل",
+  "download_canceled": "تم إلغاء التحميل من قِبل المستخدم",
+  "saved_to": "تم الحفظ في",
+  "invoice_downloaded": "تم تحميل الفاتورة",
 };

@@ -25,12 +25,11 @@ import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/refund_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../data_model/order_item_response.dart';
-import '../../repositories/api-request.dart';
+import 'download_bill.dart';
 
 class OrderDetails extends StatefulWidget {
   final int? id;
@@ -59,13 +58,6 @@ class _OrderDetailsState extends State<OrderDetails> {
   final TextEditingController _refundReasonController = TextEditingController();
   bool _showReasonWarning = false;
 
-  @pragma('vm:entry-point')
-  static void downloadCallback(String id, int status, int progress) {
-    final SendPort? send =
-        IsolateNameServer.lookupPortByName('downloader_send_port');
-    send?.send([id, status, progress]);
-  }
-
   //init
   int _stepIndex = 0;
   final ReceivePort _port = ReceivePort();
@@ -91,8 +83,6 @@ class _OrderDetailsState extends State<OrderDetails> {
       },
     );
 
-    FlutterDownloader.registerCallback(downloadCallback);
-
     super.initState();
 
     print(widget.id);
@@ -101,10 +91,6 @@ class _OrderDetailsState extends State<OrderDetails> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  Future<String?> _downloadInvoice(int id) async {
-    return ApiRequest.downloadFile("/invoice/download/$id");
   }
 
   fetchAll() {
@@ -1345,39 +1331,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                           )),
                       const SizedBox(height: AppDimensions.paddingSmall),
-                      Btn.basic(
-                        minWidth: 60,
-                        onPressed: () =>
-                            _downloadInvoice(_orderDetails?.id ?? -1),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppDimensions.paddingNormal,
-                            vertical: AppDimensions.paddingSmall,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              AppDimensions.radiusSmall,
-                            ),
-                            border: Border.all(color: MyTheme.medium_grey),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.file_download_outlined,
-                                color: MyTheme.grey_153,
-                                size: 16,
-                              ),
-                              Text(
-                                'invoice_ucf'.tr(context: context),
-                                style: const TextStyle(
-                                  color: MyTheme.grey_153,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                      DownloadBill(orderId: _orderDetails?.id ?? -1),
                     ],
                   ),
                 ],

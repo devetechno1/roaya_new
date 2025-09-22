@@ -14,6 +14,7 @@ class Btn {
     EdgeInsetsGeometry padding =
         const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
     double? minWidth,
+    Color? disabledBackgroundColor,
     void Function()? onPressed,
   }) {
     //if (width != null && height != null)
@@ -23,7 +24,8 @@ class Btn {
         backgroundColor: color,
         // primary: MyTheme.noColor,
         minimumSize: minWidth == null ? null : Size(minWidth, 10),
-        disabledBackgroundColor: Theme.of(OneContext().context!).disabledColor,
+        disabledBackgroundColor: disabledBackgroundColor ??
+            Theme.of(OneContext().context!).disabledColor,
         shape: shape,
       ),
       child: child,
