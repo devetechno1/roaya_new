@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "982312685420",
-    "project_id": "deveinance",
-    "storage_bucket": "deveinance.firebasestorage.app"
+    "project_number": "390780091434",
+    "project_id": "roaya-5e274",
+    "storage_bucket": "roaya-5e274.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:982312685420:android:4e684dbcd2275c1b466d49",
+        "mobilesdk_app_id": "1:390780091434:android:65153cc179d7bf0b8f5753",
         "android_client_info": {
-          "package_name": "com.devefinance"
+          "package_name": "com.atiafapps.roaya"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAzs97JOW0Fz-61-oCUtH41HPxcBSihUOE"
+          "current_key": "AIzaSyDD8nPRRI0agRSHMu8w4XtO56yfJ99_e9Q"
         }
       ],
       "services": {
@@ -26,34 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:982312685420:android:9f5394fb220f4114466d49",
+        "mobilesdk_app_id": "1:390780091434:android:82a9eb8a8589efd18f5753",
         "android_client_info": {
-          "package_name": "com.devefinance.delivery"
+          "package_name": "com.roaya.roaya"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAzs97JOW0Fz-61-oCUtH41HPxcBSihUOE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:982312685420:android:3b216fe6b1f67bfe466d49",
-        "android_client_info": {
-          "package_name": "com.devefinancestore"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAzs97JOW0Fz-61-oCUtH41HPxcBSihUOE"
+          "current_key": "AIzaSyDD8nPRRI0agRSHMu8w4XtO56yfJ99_e9Q"
         }
       ],
       "services": {
