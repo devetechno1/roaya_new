@@ -5,10 +5,66 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.44'`
+- `mobileVersion = '9.10.45'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.45 – Streaming downloads (no plugin), MediaStore export, and platform cleanup</strong></summary>
+
+### Android
+
+* Removed **flutter\_downloader** providers/custom initializer from `AndroidManifest.xml`.
+* Deleted plugin notification strings from `res/values` & `values-ar`.
+* Implemented native saver via `MethodChannel("media_store_saver")` in **`MainActivity.kt`**:
+
+  * Saves to **Public Downloads** using **MediaStore** on Android 10+ (scoped storage).
+  * Pre-Q fallback copies to `Environment.DIRECTORY_DOWNLOADS`.
+  * Supports subfolder: `Downloads/<AppName>`, proper MIME types, and sanitized filenames.
+
+### iOS
+
+* Removed **flutter\_downloader** registration from `AppDelegate.swift`.
+* Purged related pods from `Podfile.lock`.
+
+### Flutter — Download stack (plugin-free)
+
+* New streaming downloader (no external package):
+
+  * `helpers/download/download_service.dart` – **HttpClient** with progress, speed, ETA, pause/resume/cancel, resume when server supports `Accept-Ranges`.
+  * `helpers/download/download_paths.dart` – base dirs (Android temp, iOS Documents).
+  * `helpers/download/media_store_saver.dart` – bridge to Android saver.
+  * `providers/download_provider.dart` – state management for a single download task.
+  * `ui_elements/adaptive_download_tile.dart` – reusable UI (progress bar + controls).
+  * `screens/orders/download_bill.dart` – invoice download button with spinner/success state.
+* Integrations:
+
+  * `PurchasedDigitalProductCard` now shows progress and **Pause / Resume / Cancel**.
+  * `OrderDetails` uses `<DownloadBill orderId=...>` instead of inline logic.
+* Cleaned `ApiRequest`: removed download responsibilities (kept to pure HTTP).
+
+### Error handling & misc
+
+* Switched catches to `catch (e, st)` and `recordError(e, st)` across touched files for better crash reports.
+* `Btn.basic` gains `disabledBackgroundColor` to avoid unwanted disabled tint.
+
+### i18n
+
+* Added EN/AR keys: `pause`, `resume`, `cancel`, `downloaded`, `download_canceled`, `saved_to`, `invoice_downloaded`.
+
+### Dependencies
+
+* Dropped `flutter_downloader` from `pubspec.yaml`.
+* Minor transitive updates (`analyzer`, `build_runner`, `clarity_flutter`, `go_router`, etc.).
+* Flutter SDK constraint bumped to **>= 3.35.0**.
+
+### API / Backend
+
+* **No endpoint or schema changes**.
+
+### Must Update (Stores)
+
+* **No** — native/manifest changes and user-visible download behavior.</details>
 
 <details>
 <summary><strong>AV 9.10.44 – Centralized downloads, digital items logic, and unified crash capture</strong></summary>
