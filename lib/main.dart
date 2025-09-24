@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:active_ecommerce_cms_demo_app/middlewares/auth_middleware.dart';
+import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/update_screen.dart';
@@ -69,6 +70,11 @@ import 'screens/profile.dart';
 import 'screens/seller_details.dart';
 import 'services/push_notification_service.dart';
 import 'single_banner/photo_provider.dart';
+import 'status/execute_and_handle_remote_errors.dart';
+import 'status/status.dart';
+import 'data_model/login_response.dart';
+import 'helpers/auth_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   if (AppConfig.businessSettingsData.useSentry) {
@@ -114,7 +120,7 @@ Future<void> appRunner() async {
     Firebase.initializeApp(),
     Hive.initFlutter(),
   ]);
-
+   await _getUserData();
   localeTranslation = await Hive.openBox<Map>('langs');
 
   await Future.wait([
@@ -150,6 +156,48 @@ Future<void> appRunner() async {
     ),
   );
 }
+
+  Future<void> _getUserData() async {
+  if (AppConfig.oldTokenKey.trim().isEmpty) return;
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  final String? token = prefs.getString(AppConfig.oldTokenKey);
+
+  if (token?.trim().isNotEmpty != true) return;
+
+  access_token.$ = token;
+  await access_token.save();
+
+  final Status<LoginResponse> loginStatus = await executeAndHandleErrors(
+    () => AuthRepository().getUserByTokenResponse(),
+  );
+  if (loginStatus is Success<LoginResponse> &&
+      loginStatus.data.result == true) {
+    final loginResponse = loginStatus.data;
+
+    print("in the success block ");
+
+    prefs.remove(AppConfig.oldTokenKey);
+
+    await AuthHelper().setUserData(loginResponse);
+
+    await saveFCMToken();
+  } else {
+    AuthHelper().clearUserData();
+
+    String error = "an_error_occurred".tr();
+
+    if (loginStatus.data?.message.runtimeType == List) {
+      error = loginStatus.data!.message!.join("\n");
+    } else if (loginStatus.data?.message != null) {
+      error = loginStatus.data!.message.toString();
+    }
+
+    recordError(error, StackTrace.current);
+  }
+}
+
 
 void _setTag(String key, String? value) {
   if (value?.trim().isNotEmpty == true) {

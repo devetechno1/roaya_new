@@ -70,6 +70,8 @@ class AppConfig {
   //configure this
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
+        /// use only domain name without http:// or https://
+  /// if you make update to old type app from multi/cms to this. to save login put the [oldTokenKey]
   static const DOMAIN_PATH =
       "sellerwise.devefinance.com"; //use only domain name without http:// or https://
 
@@ -86,4 +88,7 @@ class AppConfig {
   static BusinessSettingsData businessSettingsData = BusinessSettingsData();
 
   static Map<String, dynamic> deviceInfo = {};
+    /// This is the token we need to get so change key if you want access token from shared preferences.
+  /// mostly in cms "user_login_token" in multi "6ammart_token" or "devetechno_token"
+  static const String oldTokenKey = "user_login_token";
 }
